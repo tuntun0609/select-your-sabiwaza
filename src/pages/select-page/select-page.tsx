@@ -43,13 +43,27 @@ export const SelectPage = () => {
 
 	const onSelect = () => {
 		if (sabiwazaPool.length !== 0 && songPool.length !== 0) {
-			const randomSabiwazaNum = getRandom(sabiwazaPool.length);
+			let tempSabiwaza = [...sabiwazaPool];
+			const randomSabiwazaNum1 = getRandom(tempSabiwaza.length);
+			const selectSabiwaza1 = tempSabiwaza[randomSabiwazaNum1];
+			tempSabiwaza.splice(randomSabiwazaNum1, 1);
+			if (tempSabiwaza.length === 0) {
+				tempSabiwaza = [...sabiwaza];
+			}
+			let randomSabiwazaNum2 = getRandom(tempSabiwaza.length);
+			let selectSabiwaza2 = tempSabiwaza[randomSabiwazaNum2];
+			while(selectSabiwaza2 === selectSabiwaza1) {
+				randomSabiwazaNum2 = getRandom(tempSabiwaza.length);
+				selectSabiwaza2 = tempSabiwaza[randomSabiwazaNum2];
+			}
+			tempSabiwaza.splice(randomSabiwazaNum2, 1);
+
 			const randomSongNum = getRandom(songPool.length);
-			console.log(sabiwazaPool[randomSabiwazaNum]);
-			setSelectList([...selectList, `${sabiwazaPool[randomSabiwazaNum]} ${songPool[randomSongNum]}`])
-	
-	
-			setSabiwazaPool(sabiwazaPool.filter((item,index) => index !== randomSabiwazaNum));
+			const selectSong = songPool[randomSongNum];
+			
+			
+			setSelectList([...selectList, `${selectSabiwaza1} ${selectSabiwaza2} | ${selectSong}`])
+			setSabiwazaPool(tempSabiwaza);
 			setSongPool(songPool.filter((item,index) => index !== randomSongNum));
 		} else {
 			message.error('技或者歌不能为空')
