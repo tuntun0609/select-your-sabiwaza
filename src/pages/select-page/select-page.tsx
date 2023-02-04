@@ -41,30 +41,40 @@ export const SelectPage = () => {
 		}
 	}, [songPool]);
 
-	const onSelect = () => {
-		if (sabiwazaPool.length !== 0 && songPool.length !== 0) {
-			let tempSabiwaza = [...sabiwazaPool];
-			const randomSabiwazaNum1 = getRandom(tempSabiwaza.length);
-			const selectSabiwaza1 = tempSabiwaza[randomSabiwazaNum1];
-			tempSabiwaza.splice(randomSabiwazaNum1, 1);
+	const selectSabiwaza = (nums: number) => {
+		let tempSabiwaza = [...sabiwazaPool];
+		if (nums >= sabiwaza.length) {
+			return tempSabiwaza;
+		}
+		let n = nums;
+		const sabiwazaes: string[] = [];
+		while(n > 0) {
+			let randomSabiwazaNum = getRandom(tempSabiwaza.length);
+			let randomSabiwaza = tempSabiwaza[randomSabiwazaNum];
+			while (sabiwazaes.indexOf(randomSabiwaza) !== -1) {
+				randomSabiwazaNum = getRandom(tempSabiwaza.length);
+				randomSabiwaza = tempSabiwaza[randomSabiwazaNum];
+			}
+			tempSabiwaza.splice(randomSabiwazaNum, 1);
+			sabiwazaes.push(randomSabiwaza);
 			if (tempSabiwaza.length === 0) {
 				tempSabiwaza = [...sabiwaza];
 			}
-			let randomSabiwazaNum2 = getRandom(tempSabiwaza.length);
-			let selectSabiwaza2 = tempSabiwaza[randomSabiwazaNum2];
-			while(selectSabiwaza2 === selectSabiwaza1) {
-				randomSabiwazaNum2 = getRandom(tempSabiwaza.length);
-				selectSabiwaza2 = tempSabiwaza[randomSabiwazaNum2];
-			}
-			tempSabiwaza.splice(randomSabiwazaNum2, 1);
+			n--;
+		}
+		setSabiwazaPool(tempSabiwaza);
+		return sabiwazaes;
+	};
+
+	const onSelect = () => {
+		if (sabiwazaPool.length !== 0 && songPool.length !== 0) {
+			const selectedSabiwaza = selectSabiwaza(2);
 
 			const randomSongNum = getRandom(songPool.length);
-			const selectSong = songPool[randomSongNum];
-			
-			
-			setSelectList([...selectList, `${selectSabiwaza1} ${selectSabiwaza2} | ${selectSong}`])
-			setSabiwazaPool(tempSabiwaza);
+			const selectedSong = songPool[randomSongNum];
 			setSongPool(songPool.filter((item,index) => index !== randomSongNum));
+			
+			setSelectList([...selectList, `${selectedSabiwaza.join(' ')} | ${selectedSong}`]);
 		} else {
 			message.error('技或者歌不能为空')
 		}
