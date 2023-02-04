@@ -1,4 +1,4 @@
-import { Button, Col, List, Modal, Row, message } from 'antd';
+import { Button, Col, List, Row, message, InputNumber } from 'antd';
 import { useLocalStorage } from 'usehooks-ts';
 
 import './select-page.scss';
@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { ListModal } from '@components';
 
 export const SelectPage = () => {
+	const DEFAULT_SABIWAZA_NUM = 2;
 	const [sabiwazaPool, setSabiwazaPool] = useState([]);
 	const [songPool, setSongPool] = useState([]);
 	const [sabiwaza] = useLocalStorage('sabiwaza', []);
@@ -13,6 +14,7 @@ export const SelectPage = () => {
 	const [selectList, setSelectList] = useState<string[]>([]);
 	const [sabiwazaPoolModal, setSabiwazaPoolModal] = useState(false);
 	const [songPoolModal, setSongPoolModal] = useState(false);
+	const [sabiwazaNum, setSabiwazaNum] = useState(DEFAULT_SABIWAZA_NUM);
 
 	const getRandom = (total: number) => {
 		return Math.floor(Math.random() * total)
@@ -68,7 +70,7 @@ export const SelectPage = () => {
 
 	const onSelect = () => {
 		if (sabiwazaPool.length !== 0 && songPool.length !== 0) {
-			const selectedSabiwaza = selectSabiwaza(2);
+			const selectedSabiwaza = selectSabiwaza(sabiwazaNum ?? DEFAULT_SABIWAZA_NUM);
 
 			const randomSongNum = getRandom(songPool.length);
 			const selectedSong = songPool[randomSongNum];
@@ -78,6 +80,13 @@ export const SelectPage = () => {
 		} else {
 			message.error('技或者歌不能为空')
 		}
+	}
+
+	const onSabiwazaNumChange = (num: any) => {
+		setSabiwazaNum(num);
+		setSabiwazaPool(sabiwaza);
+		setSongPool(song);
+		setSelectList([]);
 	}
 
 	return (
@@ -127,6 +136,28 @@ export const SelectPage = () => {
 								)}
 							></ListModal>
 						</div>
+						<Row
+							wrap={false}
+							style={{
+								display: 'flex',
+								alignItems: 'center',
+								marginBottom: '16px',
+							}}
+						>
+							<Col style={{ fontSize: '16px', whiteSpace: 'nowrap' }}>
+								一次抽取技数量：
+							</Col>
+							<Col flex="auto">
+								<InputNumber
+									placeholder={'默认为2'}
+									defaultValue={DEFAULT_SABIWAZA_NUM}
+									onChange={onSabiwazaNumChange}
+									style={{
+										width: '100%',
+									}}
+								/>
+							</Col>
+						</Row>
 						<Button
 							style={{
 								width: '100%',
