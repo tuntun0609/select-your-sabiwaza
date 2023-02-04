@@ -145,7 +145,7 @@ export const SelectPage = () => {
 							}}
 						>
 							<Col style={{ fontSize: '16px', whiteSpace: 'nowrap' }}>
-								一次抽取技数量：
+								每次抽取技数量：
 							</Col>
 							<Col flex="auto">
 								<InputNumber
