@@ -149,7 +149,8 @@ export const SelectPage = () => {
 							</Col>
 							<Col flex="auto">
 								<InputNumber
-									placeholder={'默认为2'}
+									min={1}
+									placeholder={'默认为2 最小为1'}
 									defaultValue={DEFAULT_SABIWAZA_NUM}
 									onChange={onSabiwazaNumChange}
 									style={{
