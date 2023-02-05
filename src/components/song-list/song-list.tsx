@@ -11,6 +11,10 @@ export const SongList = () => {
 	}
 
 	const onAdd = () => {
+		if (!input) {
+			message.error('输入不能为空');
+			return;
+		}
 		if (song.indexOf(input) === -1) {
 			setSong([...song, input]);
 			setInput('');
@@ -48,6 +52,9 @@ export const SongList = () => {
 				)}
 				bordered
 				dataSource={song}
+				style={{
+					marginBottom: '16px'
+				}}
 			>
 			</List>
 		</div>

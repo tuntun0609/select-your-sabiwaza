@@ -11,6 +11,10 @@ export const SabiwazaList = () => {
 	}
 
 	const onAdd = () => {
+		if (!input) {
+			message.error('输入不能为空');
+			return;
+		}
 		if (sabiwaza.indexOf(input) === -1) {
 			setSabiwaza([...sabiwaza, input]);
 			setInput('');
@@ -48,6 +52,9 @@ export const SabiwazaList = () => {
 				)}
 				bordered
 				dataSource={sabiwaza}
+				style={{
+					marginBottom: '16px'
+				}}
 			>
 			</List>
 		</div>
