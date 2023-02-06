@@ -4,11 +4,11 @@ import { useLocalStorage } from 'usehooks-ts';
 
 export const SongList = () => {
 	const [input, setInput] = useState('');
-	const [song, setSong] = useLocalStorage<string[]>('song', [])
+	const [song, setSong] = useLocalStorage<string[]>('song', []);
 
 	const onInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
 		setInput(e.target.value);
-	}
+	};
 
 	const onAdd = () => {
 		if (!input) {
@@ -21,11 +21,11 @@ export const SongList = () => {
 		} else {
 			message.error('已经存在该项');
 		}
-	}
+	};
 
 	const onDelete = (songItem: string) => {
 		setSong(song.filter(item => item !== songItem));
-	}
+	};
 
 	return (
 		<div>

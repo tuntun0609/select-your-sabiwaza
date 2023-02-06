@@ -23,7 +23,7 @@ export const SettingPage = () => {
 
 	const onSelect = () => {
 		navigate('/select');
-	}
+	};
 
 	return (
 		<div>
@@ -46,5 +46,5 @@ export const SettingPage = () => {
 				</Col>
 			</Row>
 		</div>
-	)
-}
+	);
+};

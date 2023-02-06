@@ -4,11 +4,11 @@ import { useLocalStorage } from 'usehooks-ts';
 
 export const SabiwazaList = () => {
 	const [input, setInput] = useState('');
-	const [sabiwaza, setSabiwaza] = useLocalStorage<string[]>('sabiwaza', [])
+	const [sabiwaza, setSabiwaza] = useLocalStorage<string[]>('sabiwaza', []);
 
 	const onInput: React.ChangeEventHandler<HTMLInputElement> = (e) => {
 		setInput(e.target.value);
-	}
+	};
 
 	const onAdd = () => {
 		if (!input) {
@@ -21,11 +21,11 @@ export const SabiwazaList = () => {
 		} else {
 			message.error('已经存在该项');
 		}
-	}
+	};
 
 	const onDelete = (sabiwazaItem: string) => {
 		setSabiwaza(sabiwaza.filter(item => item !== sabiwazaItem));
-	}
+	};
 
 	return (
 		<div>

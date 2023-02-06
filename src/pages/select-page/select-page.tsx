@@ -18,7 +18,7 @@ export const SelectPage = () => {
 
 	const getRandom = (total: number) => {
 		return Math.floor(Math.random() * total)
-	}
+	};
 
 	useEffect(() => {
 		setSabiwazaPool(sabiwaza);
@@ -80,14 +80,14 @@ export const SelectPage = () => {
 		} else {
 			message.error('技或者歌不能为空')
 		}
-	}
+	};
 
 	const onSabiwazaNumChange = (num: any) => {
 		setSabiwazaNum(num);
 		setSabiwazaPool(sabiwaza);
 		setSongPool(song);
 		setSelectList([]);
-	}
+	};
 
 	return (
 		<div>
