@@ -74,10 +74,12 @@ export const QuicklyImport = () => {
 
 	return (
 		<Space size={16} direction={'vertical'} style={{ width: '100%' }}>
-			<Divider style={{ margin: '8px 0' }}>技单</Divider>
+
+			<Divider style={{ margin: '8px 0', color: '#1677ff' }}>技单</Divider>
 			<Button onClick={() => importData('sabiwaza')}>导入技单</Button>
 			<Button onClick={() => exportData('sabiwaza')}>导出技单</Button>
-			<Divider style={{ margin: '8px 0' }}>歌单</Divider>
+
+			<Divider style={{ margin: '8px 0', color: '#1677ff' }}>歌单</Divider>
 			<Button onClick={() => importData('song')}>导入歌单</Button>
 			<Button onClick={() => exportData('song')}>导出歌单</Button>
 			<Modal
