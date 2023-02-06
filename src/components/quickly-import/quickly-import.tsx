@@ -58,7 +58,7 @@ export const QuicklyImport = () => {
 
 	const onModalOk = () => {
 		try {
-			const inputArr = input.split(/,|，/);
+			const inputArr = input.split(/,|，/).filter(item => !(/^\s*$/.test(item)));
 			if (type === 'sabiwaza') {
 				setSabiwaza(unionWith(sabiwaza, inputArr));
 			} else {
