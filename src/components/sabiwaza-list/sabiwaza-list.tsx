@@ -15,7 +15,7 @@ export const SabiwazaList = () => {
 			message.error('输入不能为空');
 			return;
 		}
-		if (sabiwaza.indexOf(input) === -1) {
+		if (!sabiwaza.includes(input)) {
 			setSabiwaza([...sabiwaza, input]);
 			setInput('');
 		} else {

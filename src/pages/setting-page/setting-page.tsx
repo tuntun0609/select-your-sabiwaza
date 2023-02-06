@@ -1,7 +1,7 @@
 import { Button, Col, Row, Tabs, TabsProps } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
-import { SabiwazaList, SongList } from '@components';
+import { QuicklyImport, SabiwazaList, SongList } from '@components';
 
 import './setting-page.scss';
 
@@ -18,6 +18,11 @@ export const SettingPage = () => {
 			key: '2',
 			label: '歌池',
 			children: <SongList />,
+		},
+		{
+			key: '3',
+			label: '快速导入导出',
+			children: <QuicklyImport />,
 		},
 	];
 

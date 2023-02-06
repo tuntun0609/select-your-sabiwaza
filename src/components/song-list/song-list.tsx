@@ -15,7 +15,7 @@ export const SongList = () => {
 			message.error('输入不能为空');
 			return;
 		}
-		if (song.indexOf(input) === -1) {
+		if (!song.includes(input)) {
 			setSong([...song, input]);
 			setInput('');
 		} else {
